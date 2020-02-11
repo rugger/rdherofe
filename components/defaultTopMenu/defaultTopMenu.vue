@@ -1,10 +1,11 @@
 <template>
-    <div class="MusicSchedTopMenu">
+    <div class="defaultTopMenu">
       <v-app-bar
         color="orange darken-3"
         dense
         dark
-        :clipped-right="clipped"
+        :clipped-left="leftClipped"
+        :clipped-right="rightClipped"
         app
       >
         <v-app-bar-nav-icon @click.stop="appDrawer = !appDrawer"></v-app-bar-nav-icon>
@@ -31,51 +32,13 @@
           </v-avatar>
         </v-btn>
       </v-app-bar>
-      <v-navigation-drawer
-        v-model="appDrawer"
-        absolute
-        temporary
-        app
-      >
-        <v-row color="teal" class="ml-2 mt-2">
-          <v-btn icon @click.stop="appDrawer = !appDrawer">
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
-          <h3 class="pl-3 mx-auto">Apps</h3>
-        </v-row>
-        <v-list
-          nav
-        >
-          <v-list-item-group
-            v-model="appGroup"
-            active-class="orange--text text--darken-2"
-          >
-            <v-list-item>
-              <v-icon color="orange lighten-2">mdi-calendar-clock</v-icon>
-              <v-list-item-title>Music Scheduler</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-icon color="orange darken-2">mdi-traffic-light</v-icon>
-              <v-list-item-title>Traffic Scheduler</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-icon color="orange lighten-1">mdi-microphone</v-icon>
-              <v-list-item-title>Voice Tracker</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-icon color="orange darken-1">mdi-library-music</v-icon>
-              <v-list-item-title>Audio Library</v-list-item-title>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-navigation-drawer>
-
+      <RDHeroAppDrawer appDrawer="appDrawer" v-model="appDrawer" appGroup="appGroup"/>
       <v-navigation-drawer
         v-model="userDrawer"
         right
         app
         fixed
-        :clipped = "clipped"
+        :clipped = "userDrawerClipped"
       >
       <v-row
         class="ml-2"
@@ -101,16 +64,21 @@
 </template>
 
 <script>
+  import RDHeroAppDrawer from '../RDHeroAppDrawer/RDHeroAppDrawer'
     export default {
-      name: 'MusicSchedTopMenu',
+      components: { RDHeroAppDrawer },
+      name: 'defaultTopMenu',
         props: {
             appName: String,
         },
       data: () => ({
           appDrawer: false,
-          appGroup: null,
           userDrawer: false,
-          clipped: true,
+          userDrawerClipped: true,
+          // appDrawerClipped: true,
+          rightClipped: false,
+          leftClipped: false,
+          clipped: false,
         }),
       watch: {
         appGroup () {

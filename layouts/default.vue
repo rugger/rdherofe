@@ -106,7 +106,7 @@ export default {
         {
           icon: 'mdi-microphone',
           title: 'HOME',
-          to: '/home'
+          to: '/'
         }
       ],
       miniVariant: false,

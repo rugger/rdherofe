@@ -1,5 +1,5 @@
 <template>
-    <div class="ToolBar">
+    <div class="msToolBar">
       <v-toolbar
         color="grey lighten-4"
         dense
@@ -29,6 +29,7 @@
 
 <script>
     export default {
+      name: 'msTooBar',
         props: {
         },
     };
